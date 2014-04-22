@@ -8,11 +8,11 @@ import java.util.NoSuchElementException;
  * Date: 22.04.2014
  * Time: 21:14
  */
-public class DoubleIterator<E> implements Iterator<E> {
+public class TwiceIterator<E> implements Iterator<E> {
     private Iterator<E> currentIterator;
     private Option<Iterator<E>> nextIteratorOption;
 
-    public DoubleIterator(Iterator<E> iterator1, Iterator<E> iterator2) {
+    public TwiceIterator(Iterator<E> iterator1, Iterator<E> iterator2) {
         currentIterator = iterator1;
         nextIteratorOption = Option.some(iterator2);
     }

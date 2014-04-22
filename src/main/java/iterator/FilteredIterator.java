@@ -1,7 +1,5 @@
 package iterator;
 
-import tools.data_structures.Option;
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
