@@ -10,11 +10,11 @@ import java.util.NoSuchElementException;
  */
 public class DoubleIterator<E> implements Iterator<E> {
     private Iterator<E> currentIterator;
-    private Option<Iterator<E>> nextIteratorOption;
+    private Iterable<Iterator<E>> nextIteratorOption;
 
     public DoubleIterator(Iterator<E> iterator1, Iterator<E> iterator2) {
         currentIterator = iterator1;
-        nextIteratorOption = Option.some(iterator2);
+        nextIteratorOption = Iterators.singleton(iterator2);
     }
 
     @Override
@@ -25,7 +25,7 @@ public class DoubleIterator<E> implements Iterator<E> {
 
         for (Iterator<E> nextIterator : nextIteratorOption) {
             currentIterator = nextIterator;
-            nextIteratorOption = Option.none();
+            nextIteratorOption = Iterators.empty();
             return hasNext();
         }
 

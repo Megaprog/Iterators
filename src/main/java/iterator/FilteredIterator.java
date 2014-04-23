@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
  */
 public abstract class FilteredIterator<E> implements Iterator<E> {
     private final Iterator<E> iterator;
-    private Option<E> nextOption = Option.none();
+    private Iterator<E> nextOption = Iterators.<E>empty().iterator();
 
     public FilteredIterator(Iterator<E> iterator) {
         this.iterator = iterator;
@@ -18,14 +18,14 @@ public abstract class FilteredIterator<E> implements Iterator<E> {
 
     @Override
     public boolean hasNext() {
-        if (nextOption.isDefined()) {
+        if (nextOption.hasNext()) {
             return true;
         }
 
         while (iterator.hasNext()) {
             final E next = iterator.next();
             if (filter(next)) {
-                nextOption = Option.some(next);
+                nextOption = Iterators.singleton(next).iterator();
                 return true;
             }
         }
@@ -35,8 +35,9 @@ public abstract class FilteredIterator<E> implements Iterator<E> {
 
     @Override
     public E next() {
-        for (E next : nextOption) {
-            nextOption = Option.none();
+        if (nextOption.hasNext()) {
+            final E next = nextOption.next();
+            nextOption = Iterators.<E>empty().iterator();
             return next;
         }
 
