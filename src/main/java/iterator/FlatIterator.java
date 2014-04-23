@@ -8,12 +8,12 @@ import java.util.NoSuchElementException;
  * Date: 23.04.2014
  * Time: 9:03
  */
-public class FlatIterator<I extends Iterator<? extends Iterable<E>>, E> implements Iterator<E> {
-    private final I notFlatIterator;
+public class FlatIterator<E> implements Iterator<E> {
+    private final Iterator<? extends Iterable<E>> iterator;
     private Iterator<? extends E> currentIterator = Iterators.<E>empty().iterator();
 
-    public FlatIterator(I notFlatIterator) {
-        this.notFlatIterator = notFlatIterator;
+    public FlatIterator(Iterator<? extends Iterable<E>> iterator) {
+        this.iterator = iterator;
     }
 
     @Override
@@ -22,8 +22,8 @@ public class FlatIterator<I extends Iterator<? extends Iterable<E>>, E> implemen
             return true;
         }
 
-        if (notFlatIterator.hasNext()) {
-            currentIterator = notFlatIterator.next().iterator();
+        if (iterator.hasNext()) {
+            currentIterator = iterator.next().iterator();
             return hasNext();
         }
 
@@ -41,6 +41,6 @@ public class FlatIterator<I extends Iterator<? extends Iterable<E>>, E> implemen
 
     @Override
     public void remove() {
-
+        throw new UnsupportedOperationException();
     }
 }

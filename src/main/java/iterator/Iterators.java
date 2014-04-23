@@ -42,12 +42,16 @@ public class Iterators {
         return new RangeDoubleIterable(from, to, step);
     }
 
-    public static <T> Iterable<T> join(Iterable<? extends T> iterable1, Iterable<? extends T> iterable2) {
-        return new JoinIterable<T>(iterable1, iterable2);
+    public static <T> Iterable<T> merge(Iterable<? extends T> iterable1, Iterable<? extends T> iterable2) {
+        return new MergeIterable<T>(iterable1, iterable2);
     }
 
     public static <T> Iterable<T> repeat(T value, int times) {
         return new RepeatedIterable<T>(value, times);
+    }
+
+    public static <T> Iterable<T> flat(Iterable<? extends Iterable<T>> iterable) {
+        return new FlatIterable<T>(iterable);
     }
 
     public static <C extends Collection<E>, E> C toCollection(Iterable<? extends E> iterable, C collection) {

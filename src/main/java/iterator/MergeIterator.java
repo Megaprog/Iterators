@@ -8,11 +8,11 @@ import java.util.NoSuchElementException;
  * Date: 22.04.2014
  * Time: 21:14
  */
-public class JoinIterator<E> implements Iterator<E> {
+public class MergeIterator<E> implements Iterator<E> {
     private Iterator<? extends E> currentIterator;
     private Iterator<? extends Iterator<? extends E>> nextIteratorOption;
 
-    public JoinIterator(Iterator<? extends E> iterator1, Iterator<? extends E> iterator2) {
+    public MergeIterator(Iterator<? extends E> iterator1, Iterator<? extends E> iterator2) {
         currentIterator = iterator1;
         nextIteratorOption = Iterators.singleton(iterator2).iterator();
     }

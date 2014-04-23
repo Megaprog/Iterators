@@ -2,6 +2,8 @@ package iterator;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
@@ -48,16 +50,21 @@ public class IteratorsTest {
     }
 
     @Test
-    public void testJoin() throws Exception {
-        assertThat(Iterators.join(Iterators.<Double>empty(), Iterators.singleton(0.0)), contains(0.0));
-        assertThat(Iterators.join(Iterators.range(1, 2), Iterators.join(Iterators.range(5, 6), Iterators.singleton(3))), contains(1, 2, 5, 6, 3));
-        assertThat(Iterators.join(Iterators.singleton(1), Iterators.singleton(2.0)), contains(1, 2.0));
+    public void testMerge() throws Exception {
+        assertThat(Iterators.merge(Iterators.<Double>empty(), Iterators.singleton(0.0)), contains(0.0));
+        assertThat(Iterators.merge(Iterators.range(1, 2), Iterators.merge(Iterators.range(5, 6), Iterators.singleton(3))), contains(1, 2, 5, 6, 3));
+        assertThat(Iterators.merge(Iterators.singleton(1), Iterators.singleton(2.0)), contains(1, 2.0));
     }
 
     @Test
     public void testRepeat() throws Exception {
         assertThat(Iterators.repeat(1, 3), contains(1, 1, 1));
         assertThat(Iterators.repeat("Victory", 2), contains("Victory", "Victory"));
+    }
+
+    @Test
+    public void testFlat() throws Exception {
+        assertThat(Iterators.flat(Arrays.asList(Iterators.range(1, 2), Iterators.singleton(0), Iterators.range(3, 4))), contains(1, 2, 0, 3, 4));
     }
 
     @Test
