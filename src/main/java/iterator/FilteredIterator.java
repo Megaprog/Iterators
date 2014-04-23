@@ -35,17 +35,11 @@ public abstract class FilteredIterator<E> implements Iterator<E> {
 
     @Override
     public E next() {
-        if (nextOption.hasNext()) {
-            final E next = nextOption.next();
-            nextOption = Iterators.<E>empty().iterator();
-            return next;
+        if (!hasNext()) {
+            throw new NoSuchElementException();
         }
 
-        if (hasNext()) {
-            return next();
-        }
-
-        throw new NoSuchElementException();
+        return nextOption.next();
     }
 
     @Override

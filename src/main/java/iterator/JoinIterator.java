@@ -10,11 +10,11 @@ import java.util.NoSuchElementException;
  */
 public class JoinIterator<E> implements Iterator<E> {
     private Iterator<? extends E> currentIterator;
-    private Iterable<? extends Iterator<? extends E>> nextIteratorOption;
+    private Iterator<? extends Iterator<? extends E>> nextIteratorOption;
 
     public JoinIterator(Iterator<? extends E> iterator1, Iterator<? extends E> iterator2) {
         currentIterator = iterator1;
-        nextIteratorOption = Iterators.singleton(iterator2);
+        nextIteratorOption = Iterators.singleton(iterator2).iterator();
     }
 
     @Override
@@ -23,9 +23,8 @@ public class JoinIterator<E> implements Iterator<E> {
             return true;
         }
 
-        for (Iterator<? extends E> nextIterator : nextIteratorOption) {
-            currentIterator = nextIterator;
-            nextIteratorOption = Iterators.empty();
+        if (nextIteratorOption.hasNext()) {
+            currentIterator = nextIteratorOption.next();
             return hasNext();
         }
 
@@ -34,15 +33,11 @@ public class JoinIterator<E> implements Iterator<E> {
 
     @Override
     public E next() {
-        if (currentIterator.hasNext()) {
-            return currentIterator.next();
+        if (!hasNext()) {
+            throw new NoSuchElementException();
         }
 
-        if (hasNext()) {
-            return next();
-        }
-
-        throw new NoSuchElementException();
+        return currentIterator.next();
     }
 
     @Override
