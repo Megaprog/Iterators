@@ -1,5 +1,6 @@
 package iterator;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
 /**
@@ -9,7 +10,8 @@ import java.util.Iterator;
  *
  * Wrap some iterable and filter its elements
  */
-public abstract class FilteredIterable<T> implements Iterable<T> {
+public abstract class FilteredIterable<T> implements Iterable<T>, Serializable {
+    private static final long serialVersionUID = 725159759108691978L;
     private final Iterable<T> iterable;
 
     public FilteredIterable(Iterable<T> iterable) {

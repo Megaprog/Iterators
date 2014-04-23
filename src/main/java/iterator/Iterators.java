@@ -26,6 +26,30 @@ public class Iterators {
         return new OptionIterable<T>(value);
     }
 
+    public static Iterable<Integer> range(int from, int to) {
+        return range(from, to, 1);
+    }
+
+    public static Iterable<Integer> range(int from, int to, int step) {
+        return new RangeIntegerIterable(from, to, step);
+    }
+
+    public static Iterable<Double> range(double from, double to) {
+        return range(from, to, 1.0);
+    }
+
+    public static Iterable<Double> range(double from, double to, double step) {
+        return new RangeDoubleIterable(from, to, step);
+    }
+
+    public static <T> Iterable<T> join(Iterable<? extends T> iterable1, Iterable<? extends T> iterable2) {
+        return new JoinIterable<T>(iterable1, iterable2);
+    }
+
+    public static <T> Iterable<T> repeat(T value, int times) {
+        return new RepeatedIterable<T>(value, times);
+    }
+
     public static <C extends Collection<E>, E> C toCollection(Iterable<? extends E> iterable, C collection) {
         for (E element : iterable) {
             collection.add(element);
