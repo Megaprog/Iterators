@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.util.Arrays;
 
 import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 
@@ -14,6 +15,12 @@ import static org.junit.Assert.assertThat;
  * Time: 11:28
  */
 public class IteratorsTest {
+
+    @Test
+    public void testCount() throws Exception {
+        assertEquals(3, Iterators.count(Arrays.asList(1, 2, 3)));
+        assertEquals(0, Iterators.count(Iterators.empty()));
+    }
 
     @Test
     public void testEmpty() throws Exception {

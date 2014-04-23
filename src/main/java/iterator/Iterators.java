@@ -13,6 +13,14 @@ public class Iterators {
 
     private Iterators() {}
 
+    public static <T> int count(Iterable<T> iterable) {
+        int count = 0;
+        for (T element : iterable) {
+            count++;
+        }
+        return count;
+    }
+
     @SuppressWarnings("unchecked")
     public static <T> Iterable<T> empty() {
         return (Iterable<T>) EmptyIterable.EMPTY_ITERABLE;
@@ -52,6 +60,10 @@ public class Iterators {
 
     public static <T> Iterable<T> flat(Iterable<? extends Iterable<T>> iterable) {
         return new FlatIterable<T>(iterable);
+    }
+
+    public static <T> Collection<T> collection(Iterable<T> iterable) {
+        return new IterableCollection<T>(iterable);
     }
 
     public static <C extends Collection<E>, E> C toCollection(Iterable<? extends E> iterable, C collection) {
