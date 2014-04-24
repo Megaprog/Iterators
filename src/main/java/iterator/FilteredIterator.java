@@ -24,7 +24,7 @@ public abstract class FilteredIterator<E> implements Iterator<E> {
 
         while (iterator.hasNext()) {
             final E next = iterator.next();
-            if (filter(next)) {
+            if (test(next)) {
                 nextOption = Iterators.singleton(next).iterator();
                 return true;
             }
@@ -47,5 +47,5 @@ public abstract class FilteredIterator<E> implements Iterator<E> {
         iterator.remove();
     }
 
-    abstract public boolean filter(E element);
+    abstract public boolean test(E e);
 }

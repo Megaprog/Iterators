@@ -22,11 +22,11 @@ public abstract class FilteredIterable<T> implements Iterable<T>, Serializable {
     public Iterator<T> iterator() {
         return new FilteredIterator<T>(iterable.iterator()) {
             @Override
-            public boolean filter(T element) {
-                return FilteredIterable.this.filter(element);
+            public boolean test(T t) {
+                return FilteredIterable.this.test(t);
             }
         };
     }
 
-    abstract public boolean filter(T element);
+    abstract public boolean test(T t);
 }
