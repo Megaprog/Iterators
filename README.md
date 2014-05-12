@@ -1,6 +1,6 @@
 # Iterators
 
-Iterators framework is the implementation of lazy collections functional based on Iterator and Iterable interfaces.
+Iterators framework is the implementation of lazy collections functional based on Iterator and Iterable interfaces
 
 ## How do I use it?
 
