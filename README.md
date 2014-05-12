@@ -18,9 +18,12 @@ Or use it as a maven dependency:
 ```
 
 ## What can I do with Iterators?
-All of the following redis features are supported:
 
 - Merge two or more iterators into one
-- Filter iterator values by producing other
-- Map iterator values to produce
-
+- Filter iterator values
+- Map iterator values
+- Reduce iterator values to produce single result
+- Repeat a value by creation iterator contains this value some number of times
+- Produce ranges contains the sequence of integer or double values
+- Create Java Collection implementation from any Iterable
+- Create Empty, Singleton or Optional Iterable
