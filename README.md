@@ -2,7 +2,7 @@
 
 Iterators framework is the implementation of lazy collections functional based on Iterator and Iterable interfaces.
 
-# How do I use it?
+## How do I use it?
 
 You can download the latest build at:
     https://github.com/Megaprog/Iterators/releases
