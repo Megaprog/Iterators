@@ -1,6 +1,6 @@
 # Iterators
 
-Iterators framework is the implementation of lazy collections functional based on Iterator and Iterable interfaces
+Iterators framework is the implementation of lazy collections functional based on Iterator and Iterable interfaces.
 
 ## How do I use it?
 
@@ -25,5 +25,5 @@ Or use it as a maven dependency:
 - Reduce iterator values to produce single result
 - Repeat a value by creation iterator contains this value some number of times
 - Produce ranges contains the sequence of integer or double values
-- Create Java Collection implementation from any Iterable
+- Create Java Collection from any Iterable
 - Create Empty, Singleton or Optional Iterable

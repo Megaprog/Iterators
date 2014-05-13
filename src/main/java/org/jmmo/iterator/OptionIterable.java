@@ -1,4 +1,4 @@
-package iterator;
+package org.jmmo.iterator;
 
 import java.io.Serializable;
 import java.util.Collections;

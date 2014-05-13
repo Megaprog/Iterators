@@ -1,4 +1,4 @@
-package iterator;
+package org.jmmo.iterator;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -8,20 +8,24 @@ import java.util.NoSuchElementException;
  * Date: 22.04.2014
  * Time: 21:15
  */
-public class RangeDoubleIterator implements Iterator<Double> {
-    private final double step;
-    private final double limit;
+public class RangeIntegerIterator implements Iterator<Integer> {
+    private final int step;
+    private final int limit;
     private final boolean asc;
-    private double value;
+    private int value;
 
-    public RangeDoubleIterator(double from, double to) {
-        this(from, to, 1.0);
+    public RangeIntegerIterator(int from, int to) {
+        this(from, to, 1);
     }
 
-    public RangeDoubleIterator(double from, double to, double step) {
+    public RangeIntegerIterator(int from, int to, int step) {
+        if (step == 0) {
+            throw new IllegalArgumentException("Step cannot be zero");
+        }
+
         this.step = step;
         this.limit = to;
-        this.asc = step > 0.0;
+        this.asc = step > 0;
         this.value = from;
     }
 
@@ -31,12 +35,12 @@ public class RangeDoubleIterator implements Iterator<Double> {
     }
 
     @Override
-    public Double next() {
+    public Integer next() {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
 
-        final double result = value;
+        final int result = value;
         value += step;
         return result;
     }
