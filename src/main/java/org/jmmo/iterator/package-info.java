@@ -7,7 +7,7 @@
  * Iterable<String> empty = Iterators.<String>empty();
  * }</pre>
  *
- * Obtain Iterable contains single element:
+ * Obtain Iterable contains a single element:
  * <pre>{@code
  * Iterable<String> singleton = Iterators.singleton("jmmo");
  * }</pre>
@@ -27,7 +27,7 @@
  * Iterable<Integer> merged = Iterators.merge(Arrays.asList(1, 2), Arrays.asList(4, 5));
  * }</pre>
  *
- * Make flat Iterable from Iterable of Iterable's (will contains 1, 2, 0, 3, 4):
+ * Make the flat Iterable from an Iterable of Iterable's (will contains 1, 2, 0, 3, 4):
  * <pre>{@code
  * Iterable<Integer> flat = Iterators.flat(Arrays.asList(Iterators.range(1, 2), Iterators.singleton(0), Iterators.range(3, 4)));
  * }</pre>
