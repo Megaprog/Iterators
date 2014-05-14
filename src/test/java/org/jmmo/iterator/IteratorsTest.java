@@ -2,7 +2,10 @@ package org.jmmo.iterator;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
@@ -76,36 +79,26 @@ public class IteratorsTest {
 
     @Test
     public void testToCollection() throws Exception {
-
+        assertEquals(Iterators.toCollection(Iterators.range(1, 3), new ArrayList<Integer>()), Arrays.asList(1, 2, 3));
     }
 
     @Test
     public void testToList() throws Exception {
-
-    }
-
-    @Test
-    public void testToList1() throws Exception {
-
+        assertEquals(Iterators.toList(Iterators.range(1, 3)), Arrays.asList(1, 2, 3));
     }
 
     @Test
     public void testToSet() throws Exception {
-
-    }
-
-    @Test
-    public void testToSet1() throws Exception {
-
+        assertEquals(Iterators.toSet(Iterators.range(1, 3)), new HashSet<Integer>() {{
+            add(1); add(3); add(2);
+        }});
     }
 
     @Test
     public void testToMap() throws Exception {
-
-    }
-
-    @Test
-    public void testToMap1() throws Exception {
-
+        assertEquals(Iterators.toMap(Iterators.merge(new HashMap<String, Integer>() {{put("a", 1); put("b", 2);}}.entrySet(),
+                new HashMap<String, Integer>() {{put("c", 3); put("d", 4);}}.entrySet())), new HashMap<String, Integer>() {{
+            put("d", 4); put("c", 3); put("a", 1); put("b", 2);
+        }});
     }
 }
