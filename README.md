@@ -19,6 +19,7 @@ Or use it as a maven dependency:
 
 ## What can I do with Iterators?
 
+- Create Empty, Singleton or Optional Iterable
 - Merge two or more iterators into one
 - Filter iterator values
 - Map iterator values
@@ -26,4 +27,10 @@ Or use it as a maven dependency:
 - Repeat a value by creation iterator contains this value some number of times
 - Produce ranges contains the sequence of integer or double values
 - Create Java Collection from any Iterable
-- Create Empty, Singleton or Optional Iterable
+
+## Examples
+
+Obtain empty Iterable:
+```java
+Iterable<String> empty = Iterators.<String>empty();
+```
