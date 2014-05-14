@@ -2,10 +2,10 @@ package org.jmmo.iterator;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
@@ -79,7 +79,7 @@ public class IteratorsTest {
 
     @Test
     public void testToCollection() throws Exception {
-        assertEquals(Iterators.toCollection(Iterators.range(1, 3), new ArrayList<Integer>()), Arrays.asList(1, 2, 3));
+        assertEquals(Iterators.toCollection(Iterators.range(1, 3), new LinkedList<Integer>()), Arrays.asList(1, 2, 3));
     }
 
     @Test
