@@ -8,8 +8,8 @@
     <packaging>jar</packaging>
 
     <name>Iterators</name>
-    <description>Lazy collections based on Iterator and Iterable interfaces</description>
-    <url>https://github.com/Megaprog/Iterators</url>
+    <description>It is the framework of lazy collections based on Iterator and Iterable interfaces</description>
+    <url>http://www.jmmo.org/frameworks/iterators</url>
 
     <licenses>
         <license>
