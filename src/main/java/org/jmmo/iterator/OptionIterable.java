@@ -19,7 +19,6 @@ public class OptionIterable<T> implements Iterable<T>, Serializable {
         this.value = value;
     }
 
-    @Override
     public Iterator<T> iterator() {
         return value == null ? Collections.<T>emptyList().iterator() : Collections.singletonList(value).iterator();
     }

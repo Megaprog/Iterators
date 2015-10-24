@@ -17,7 +17,6 @@ public class MergeIterator<E> implements Iterator<E> {
         nextIteratorOption = Iterators.singleton(iterator2).iterator();
     }
 
-    @Override
     public boolean hasNext() {
         if (currentIterator.hasNext()) {
             return true;
@@ -31,7 +30,6 @@ public class MergeIterator<E> implements Iterator<E> {
         return false;
     }
 
-    @Override
     public E next() {
         if (!hasNext()) {
             throw new NoSuchElementException();
@@ -40,7 +38,6 @@ public class MergeIterator<E> implements Iterator<E> {
         return currentIterator.next();
     }
 
-    @Override
     public void remove() {
         currentIterator.remove();
     }

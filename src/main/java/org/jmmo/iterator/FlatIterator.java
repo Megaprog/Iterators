@@ -16,7 +16,6 @@ public class FlatIterator<E> implements Iterator<E> {
         this.iterator = iterator;
     }
 
-    @Override
     public boolean hasNext() {
         if (currentIterator.hasNext()) {
             return true;
@@ -30,7 +29,6 @@ public class FlatIterator<E> implements Iterator<E> {
         return false;
     }
 
-    @Override
     public E next() {
         if (!hasNext()) {
             throw new NoSuchElementException();
@@ -39,7 +37,6 @@ public class FlatIterator<E> implements Iterator<E> {
         return currentIterator.next();
     }
 
-    @Override
     public void remove() {
         throw new UnsupportedOperationException();
     }

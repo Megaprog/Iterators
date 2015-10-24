@@ -19,7 +19,6 @@ public class SingletonIterable<T> implements Iterable<T>, Serializable {
         this.value = value;
     }
 
-    @Override
     public Iterator<T> iterator() {
         return Collections.singletonList(value).iterator();
     }

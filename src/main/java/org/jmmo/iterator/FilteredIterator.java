@@ -16,7 +16,6 @@ public abstract class FilteredIterator<E> implements Iterator<E> {
         this.iterator = iterator;
     }
 
-    @Override
     public boolean hasNext() {
         if (nextOption.hasNext()) {
             return true;
@@ -33,7 +32,6 @@ public abstract class FilteredIterator<E> implements Iterator<E> {
         return false;
     }
 
-    @Override
     public E next() {
         if (!hasNext()) {
             throw new NoSuchElementException();
@@ -42,7 +40,6 @@ public abstract class FilteredIterator<E> implements Iterator<E> {
         return nextOption.next();
     }
 
-    @Override
     public void remove() {
         iterator.remove();
     }

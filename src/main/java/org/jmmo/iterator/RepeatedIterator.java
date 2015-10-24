@@ -18,12 +18,10 @@ public class RepeatedIterator<E> implements Iterator<E> {
         this.times = times;
     }
 
-    @Override
     public boolean hasNext() {
         return count < times;
     }
 
-    @Override
     public E next() {
         if (!hasNext()) {
             throw new NoSuchElementException();
@@ -33,7 +31,6 @@ public class RepeatedIterator<E> implements Iterator<E> {
         return value;
     }
 
-    @Override
     public void remove() {
         throw new UnsupportedOperationException();
     }

@@ -1,6 +1,6 @@
 # Iterators
 
-Iterators framework is the implementation of lazy collections functional based on Iterator and Iterable interfaces.
+Iterators framework is the implementation of lazy collections functional based on Iterator and Iterable interfaces. Requires Java 1.5 +
 
 ## How do I use it?
 
@@ -62,32 +62,41 @@ Iterable<Integer> flat = Iterators.flat(Arrays.asList(Iterators.range(1, 2), Ite
 
 Filter the Iterable (will contains even numbers from 2 to 100):
 ```java
-Iterable<Integer> even = new FilteredIterable<Integer>(Iterators.range(1, 100)) {
+Iterable<Integer> even = Iterators.filter(Iterators.range(1, 100), new Filter<Integer>() {
     @Override
     public boolean test(Integer integer) {
         return integer % 2 == 0;
     }
-};
+});
 ```
 
 Map the Iterable (will contains "1", "2", "3"):
 ```java
-Iterable<String> int2String = new MappedIterable<Integer, String>(Iterators.range(1, 3)) {
+Iterable<String> int2String = Iterators.map(Iterators.range(1, 3), new Mapper<Integer, String>() {
     @Override
     public String mapper(Integer integer) {
         return Integer.toString(integer);
     }
-};
+});
 ```
 
 Reduce Iterable to produce a single result (will be 6):
 ```java
-int length = new Reducer<String, Integer>() {
+Reducer<Integer> reducer = new Reducer<Integer>() {
     @Override
-    public Integer accumulate(Integer integer, String s) {
-        return integer + s.length();
+    public Integer accumulate(Integer previous, Integer current) {
+        return previous + current;
     }
-}.reduce(0, "AB", "C", "DEF", "");
+};
+
+Mapper<String, Integer> mapper = new Mapper<String, Integer>() {
+    @Override
+    public Integer mapper(String s) {
+        return s.length();
+    }
+};
+
+int length = reducer.reduce(0, mapper.map("AB", "C", "DEF", ""));
 ```
 
 Create Collection, List or Set from any Iterable:

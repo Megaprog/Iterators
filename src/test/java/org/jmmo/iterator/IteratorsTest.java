@@ -78,6 +78,26 @@ public class IteratorsTest {
     }
 
     @Test
+    public void testFilter() throws Exception {
+        assertThat(Iterators.filter(Arrays.asList(1, 2, 3, 4, 5), new Filter<Integer>() {
+            @Override
+            public boolean test(Integer integer) {
+                return integer % 2 == 0;
+            }
+        }), contains(2, 4));
+    }
+
+    @Test
+    public void testMapper() throws Exception {
+        assertThat(Iterators.map(Arrays.asList(1, 2, 3), new Mapper<Integer, String>() {
+            @Override
+            public String mapper(Integer integer) {
+                return Integer.toString(integer);
+            }
+        }), contains("1", "2", "3"));
+    }
+
+    @Test
     public void testToCollection() throws Exception {
         assertEquals(Iterators.toCollection(Iterators.range(1, 3), new LinkedList<Integer>()), Arrays.asList(1, 2, 3));
     }
@@ -96,9 +116,18 @@ public class IteratorsTest {
 
     @Test
     public void testToMap() throws Exception {
-        assertEquals(Iterators.toMap(Iterators.merge(new HashMap<String, Integer>() {{put("a", 1); put("b", 2);}}.entrySet(),
-                new HashMap<String, Integer>() {{put("c", 3); put("d", 4);}}.entrySet())), new HashMap<String, Integer>() {{
+        assertEquals(new HashMap<String, Integer>() {{
             put("d", 4); put("c", 3); put("a", 1); put("b", 2);
-        }});
+        }}, Iterators.toMap(Arrays.asList("d4", "c3", "a1", "b2"), new ToMap<String, String, Integer>() {
+            @Override
+            public String key(String s) {
+                return s.substring(0, 1);
+            }
+
+            @Override
+            public Integer value(String s) {
+                return Integer.valueOf(s.substring(1));
+            }
+        }));
     }
 }

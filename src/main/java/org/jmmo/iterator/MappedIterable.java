@@ -14,7 +14,6 @@ public abstract class MappedIterable<T, R> implements Iterable<R> {
         this.iterable = iterable;
     }
 
-    @Override
     public Iterator<R> iterator() {
         return new MappedIterator<T, R>(iterable.iterator()) {
             @Override

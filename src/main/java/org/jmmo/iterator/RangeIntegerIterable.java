@@ -28,7 +28,6 @@ public class RangeIntegerIterable implements Iterable<Integer>, Serializable {
         this.step = step;
     }
 
-    @Override
     public Iterator<Integer> iterator() {
         return new RangeIntegerIterator(from, to, step);
     }

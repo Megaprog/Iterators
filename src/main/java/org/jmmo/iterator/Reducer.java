@@ -8,18 +8,14 @@ import java.util.Iterator;
  * Date: 24.04.2014
  * Time: 11:13
  */
-public abstract class Reducer<T, R> {
+public abstract class Reducer<T> {
 
-    public R reduce(R identity, Iterable<T> iterable) {
+    public T reduce(T identity, Iterable<T> iterable) {
         return reduce(identity, iterable.iterator());
     }
 
-    public R reduce(R identity, T... ts) {
-        return reduce(identity, Arrays.asList(ts));
-    }
-
-    public R reduce(R identity, Iterator<T> iterator) {
-        R result = identity;
+    public T reduce(T identity, Iterator<T> iterator) {
+        T result = identity;
         while (iterator.hasNext()) {
             T element = iterator.next();
             result = accumulate(result, element);
@@ -27,5 +23,28 @@ public abstract class Reducer<T, R> {
         return result;
     }
 
-    abstract public R accumulate(R r, T t);
+    public Iterable<T> reduce(T... ts) {
+        return reduce(Arrays.asList(ts));
+    }
+
+    public Iterable<T> reduce(Iterable<T> iterable) {
+        return reduce(iterable.iterator());
+    }
+
+    public Iterable<T> reduce(Iterator<T> iterator) {
+        boolean foundAny = false;
+        T result = null;
+        while (iterator.hasNext()) {
+            final T element = iterator.next();
+            if (!foundAny) {
+                foundAny = true;
+                result = element;
+            }
+            else
+                result = accumulate(result, element);
+        }
+        return foundAny ? Iterators.singleton(result) : Iterators.<T>empty();
+    }
+
+    abstract public T accumulate(T previous, T current);
 }

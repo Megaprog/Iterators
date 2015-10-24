@@ -8,13 +8,20 @@ public class ReducerTest {
 
     @Test
     public void testReduce() throws Exception {
-        Reducer<String, Integer> reducer = new Reducer<String, Integer>() {
+        Reducer<Integer> reducer = new Reducer<Integer>() {
             @Override
-            public Integer accumulate(Integer integer, String s) {
-                return integer + s.length();
+            public Integer accumulate(Integer previous, Integer current) {
+                return previous + current;
             }
         };
 
-        assertEquals( (int) reducer.reduce(0, "AB", "C", "DEF", ""), 6);
+        Mapper<String, Integer> mapper = new Mapper<String, Integer>() {
+            @Override
+            public Integer mapper(String s) {
+                return s.length();
+            }
+        };
+
+        assertEquals(6, reducer.reduce(0, mapper.map("AB", "C", "DEF", "")).intValue());
     }
 }

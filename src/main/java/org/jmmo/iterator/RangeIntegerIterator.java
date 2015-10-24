@@ -29,12 +29,10 @@ public class RangeIntegerIterator implements Iterator<Integer> {
         this.value = from;
     }
 
-    @Override
     public boolean hasNext() {
         return asc ? value <= limit : value >= limit;
     }
 
-    @Override
     public Integer next() {
         if (!hasNext()) {
             throw new NoSuchElementException();
@@ -45,7 +43,6 @@ public class RangeIntegerIterator implements Iterator<Integer> {
         return result;
     }
 
-    @Override
     public void remove() {
         throw new UnsupportedOperationException();
     }

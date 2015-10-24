@@ -25,12 +25,10 @@ public class RangeDoubleIterator implements Iterator<Double> {
         this.value = from;
     }
 
-    @Override
     public boolean hasNext() {
         return asc ? value <= limit : value >= limit;
     }
 
-    @Override
     public Double next() {
         if (!hasNext()) {
             throw new NoSuchElementException();
@@ -41,7 +39,6 @@ public class RangeDoubleIterator implements Iterator<Double> {
         return result;
     }
 
-    @Override
     public void remove() {
         throw new UnsupportedOperationException();
     }

@@ -54,12 +54,21 @@
  *
  * Reduce Iterable to produce a single result (will be 6):
  * <pre>{@code
- * int length = new Reducer<String, Integer>() {
+ * Reducer<Integer> reducer = new Reducer<Integer>() {
  *     &#064;Override
- *     public Integer accumulate(Integer integer, String s) {
- *         return integer + s.length();
+ *     public Integer accumulate(Integer previous, Integer current) {
+ *         return previous + current;
  *     }
- * }.reduce(0, "AB", "C", "DEF", "");
+ * };
+ *
+ * Mapper<String, Integer> mapper = new Mapper<String, Integer>() {
+ *     &#064;Override
+ *     public Integer mapper(String s) {
+ *         return s.length();
+ *     }
+ * };
+ *
+ * int length = reducer.reduce(0, mapper.map("AB", "C", "DEF", ""));
  * }</pre>
  *
  * Create Collection, List or Set from any Iterable:

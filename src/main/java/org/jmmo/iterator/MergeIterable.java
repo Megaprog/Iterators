@@ -16,7 +16,6 @@ public class MergeIterable<T> implements Iterable<T> {
         this.iterable2 = iterable2;
     }
 
-    @Override
     public Iterator<T> iterator() {
         return new MergeIterator<T>(iterable1.iterator(), iterable2.iterator());
     }

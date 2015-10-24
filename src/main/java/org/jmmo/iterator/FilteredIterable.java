@@ -18,7 +18,6 @@ public abstract class FilteredIterable<T> implements Iterable<T>, Serializable {
         this.iterable = iterable;
     }
 
-    @Override
     public Iterator<T> iterator() {
         return new FilteredIterator<T>(iterable.iterator()) {
             @Override

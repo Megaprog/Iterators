@@ -16,7 +16,6 @@ public class FlatIterable<T> implements Iterable<T>, Serializable {
         this.iterable = iterable;
     }
 
-    @Override
     public Iterator<T> iterator() {
         return new FlatIterator<T>(iterable.iterator());
     }

@@ -24,7 +24,6 @@ public class RangeDoubleIterable implements Iterable<Double>, Serializable {
         this.step = step;
     }
 
-    @Override
     public Iterator<Double> iterator() {
         return new RangeDoubleIterator(from, to, step);
     }

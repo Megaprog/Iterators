@@ -14,9 +14,14 @@ public class Iterators {
     private Iterators() {}
 
     public static <T> int count(Iterable<T> iterable) {
+        return count(iterable.iterator());
+    }
+
+    public static <T> int count(Iterator<T> iterator) {
         int count = 0;
-        for (T element : iterable) {
+        while (iterator.hasNext()) {
             count++;
+            iterator.next();
         }
         return count;
     }
@@ -62,48 +67,87 @@ public class Iterators {
         return new FlatIterable<T>(iterable);
     }
 
+    public static <T> Iterator<T> filter(Iterator<T> iterator, Filter<T> filter) {
+        return filter.filter(iterator);
+    }
+
+    public static <T> Iterable<T> filter(Iterable<T> iterable, Filter<T> filter) {
+        return filter.filter(iterable);
+    }
+
+    public static <T, R> Iterator<R> map(Iterator<T> iterator, Mapper<T, R> mapper) {
+        return mapper.map(iterator);
+    }
+
+    public static <T, R> Iterable<R> map(Iterable<T> iterable, Mapper<T, R> mapper) {
+        return mapper.map(iterable);
+    }
+
+    public static <T> T reduce(T identity, Iterator<T> iterator, Reducer<T> reducer) {
+        return reducer.reduce(identity, iterator);
+    }
+
+    public static <T> T reduce(T identity, Iterable<T> iterable, Reducer<T> reducer) {
+        return reducer.reduce(identity, iterable);
+    }
+
+    public static <T> Iterable<T> reduce(Iterator<T> iterator, Reducer<T> reducer) {
+        return reducer.reduce(iterator);
+    }
+
+    public static <T> Iterable<T> reduce(Iterable<T> iterable, Reducer<T> reducer) {
+        return reducer.reduce(iterable);
+    }
+
     public static <T> Collection<T> collection(Iterable<T> iterable) {
         return new IterableCollection<T>(iterable);
     }
 
     public static <C extends Collection<E>, E> C toCollection(Iterable<? extends E> iterable, C collection) {
-        for (E element : iterable) {
-            collection.add(element);
+        return toCollection(iterable.iterator(), collection);
+    }
+
+    public static <C extends Collection<E>, E> C toCollection(Iterator<? extends E> iterator, C collection) {
+        while (iterator.hasNext()) {
+            collection.add(iterator.next());
         }
         return collection;
     }
 
-    public static <E> List<E> toList(Iterable<E> iterable) {
-        return toList(iterable, new ArrayList<E>());
+    public static <T> List<T> toList(Iterator<T> iterator) {
+        return toCollection(iterator, new ArrayList<T>());
     }
 
-    public static <E> List<E> toList(Iterable<? extends E> iterable, List<E> list) {
-        return toCollection(iterable, list);
+    public static <T> List<T> toList(Iterable<T> iterable) {
+        return toCollection(iterable, new ArrayList<T>());
     }
 
-    public static <E> Set<E> toSet(Iterable<E> iterable) {
-        return toSet(iterable, new HashSet<E>());
+    public static <T> Set<T> toSet(Iterator<T> iterator) {
+        return toCollection(iterator, new HashSet<T>());
+    }
+    public static <T> Set<T> toSet(Iterable<T> iterable) {
+        return toCollection(iterable, new HashSet<T>());
     }
 
-    public static <E> Set<E> toSet(Iterable<? extends E> iterable, Set<E> set) {
-        return toCollection(iterable, set);
+    public static <T, K, V> Map<K, V> toMap(Iterator<T> iterator, ToMap<T, K, V> toMap) {
+        return toMap.toMap(iterator);
     }
 
-    public static <K, V> Map<K, V> toMap(Iterable<? extends Map.Entry<K, V>> iterable) {
-        return toMap(iterable, new HashMap<K, V>());
+    public static <T, K, V> Map<K, V> toMap(Iterator<T> iterator, ToMap<T, K, V> toMap, Map<K, V> map) {
+        return toMap.toMap(iterator, map);
     }
 
-    public static <K, V> Map<K, V> toMap(Iterable<? extends Map.Entry<? extends K, ? extends V>> iterable, Map<K, V> map) {
-        for (Map.Entry<? extends K, ? extends V> entry : iterable) {
-            map.put(entry.getKey(), entry.getValue());
-        }
-        return map;
+    public static <T, K, V> Map<K, V> toMap(Iterable<T> iterable, ToMap<T, K, V> toMap) {
+        return toMap.toMap(iterable);
+    }
+
+    public static <T, K, V> Map<K, V> toMap(Iterable<T> iterable, ToMap<T, K, V> toMap, Map<K, V> map) {
+        return toMap.toMap(iterable, map);
     }
 
     private static class EmptyIterable<T> implements Iterable<T> {
         static final EmptyIterable<Object> EMPTY_ITERABLE = new EmptyIterable<Object>();
 
-        @Override
         public Iterator<T> iterator() {
             return Collections.<T>emptyList().iterator();
         }

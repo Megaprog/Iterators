@@ -18,7 +18,6 @@ public class RepeatedIterable<T> implements Iterable<T>, Serializable {
         this.times = times;
     }
 
-    @Override
     public Iterator<T> iterator() {
         return new RepeatedIterator<T>(value, times);
     }
